@@ -1,0 +1,26 @@
+\section*{Experiments}
+\addcontentsline{toc}{section}{
+    \protect\numberline{}Algorithm description
+}
+
+In order to show the improvement of 
+the initialization we are going to create the following 
+experiment: 
+
+For a fixed data set $\mathcal{D}$, we split it in 
+three set: 
+
+\begin{itemize}
+    \item Train data set, $T$. 
+    \item Error in train data set, $E_{in}$. 
+    \item Test data set, $E_{out}$. 
+\end{itemize}
+
+Once $E_{in}^{Init}$ for our algorithm is computed,
+for a bathsize $b$,  we count the minimum number of epochs of backpropagation  
+needed in order to achieve $E_{in}^{Init} \geq E_{in}^{b}$. 
+
+\subsection*{Datasets}
+
+From Kaggle House Price Prediction 
+\url{https://www.kaggle.com/datasets/shree1992/housedata}

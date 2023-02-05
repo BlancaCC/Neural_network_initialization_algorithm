@@ -1,0 +1,120 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Stylish Article
+% LaTeX Template
+% Version 2.2 (2020-10-22)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Mathias Legrand (legrand.mathias@gmail.com) 
+% With extensive modifications by:
+% Vel (vel@latextemplates.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[fleqn,10pt]{SelfArx} % Document font size and equations flushed left
+
+\usepackage[english]{babel} % Specify a different language here - english by default
+\usepackage{lipsum} % Required to insert dummy text. To be removed otherwise
+\usepackage{amsthm} % Required for math stuff
+\usepackage{enumitem} % In order to use Roman enumeration
+%----------------------------------------------------------------------------------------
+%	COLUMNS
+%----------------------------------------------------------------------------------------
+
+\setlength{\columnsep}{0.55cm} % Distance between the two columns of text
+\setlength{\fboxrule}{0.75pt} % Width of the border around the abstract
+
+%----------------------------------------------------------------------------------------
+%	COLORS
+%----------------------------------------------------------------------------------------
+
+\definecolor{color1}{RGB}{0,0,90} % Color of the article title and sections
+\definecolor{color2}{RGB}{0,20,20} % Color of the boxes behind the abstract and headings
+
+
+%----------------------------------------------------------------------------------------
+%	MATH SYMBOLS
+%----------------------------------------------------------------------------------------
+\newcommand{\R}{\mathbb{R}}     % Reals
+\newcommand{\N}{\mathbb{N}}     % Naturals
+
+\newtheorem{theorem}{Theorem}
+%----------------------------------------------------------------------------------------
+%	HYPERLINKS
+%----------------------------------------------------------------------------------------
+
+\usepackage{hyperref} % Required for hyperlinks
+
+\hypersetup{
+	hidelinks,
+	colorlinks,
+	breaklinks=true,
+	urlcolor=color2,
+	citecolor=color1,
+	linkcolor=color1,
+	bookmarksopen=false,
+	pdftitle={Title},
+	pdfauthor={Author},
+}
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE INFORMATION
+%----------------------------------------------------------------------------------------
+
+\JournalInfo{ArXiV} % Journal information
+\Archive{Additional note} % Additional notes (e.g. copyright, DOI, review/research article)
+
+\PaperTitle{Making neural nets more accessible from first principles} % Article title
+
+\Authors{Blanca Cano Camarero, Jose Ramón Dorronsoro Ibero \textsuperscript{0}, Juan Julián Merelo Guervós \textsuperscript{1}, Francisco Javier Merí de la Maza\textsuperscript{2}.} % Authors
+\affiliation{\textsuperscript{0}\textit{Department of Computer Science, Universidad Autónoma Madrid, Madrid, España}} % Author affiliation
+\affiliation{\textsuperscript{1}\textit{Department of Computer Architecture, University of Granada, Granada, España}} % Author affiliation
+\affiliation{\textsuperscript{2}\textit{Department of Mathematical Analysis, University of Granada, Granada, España}} % Author affiliation
+
+\Keywords{Weight initialization --- neuronal network --- Optimization} % Keywords - if you don't want any simply remove all the text between the curly brackets
+\newcommand{\keywordname}{Keywords} % Defines the keywords heading name
+
+%----------------------------------------------------------------------------------------
+%	ABSTRACT
+%----------------------------------------------------------------------------------------
+
+\Abstract{ 
+	\input{sections/00_Abstract}
+}
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+
+\maketitle % Output the title and abstract box
+
+\tableofcontents % Output the contents section
+
+\thispagestyle{empty} % Removes page numbering from the first page
+
+%----------------------------------------------------------------------------------------
+%	ARTICLE CONTENTS
+%----------------------------------------------------------------------------------------
+\input{sections/01_Introduction}
+\input{sections/02_StateOfArt}
+\input{sections/03_AlgoritmDescription}
+\input{sections/04_Experiments}
+\input{sections/05_FurtherWork.tex}
+\input{sections/06_Appendix}
+
+\phantomsection
+\bibliographystyle{unsrt}
+\bibliography{./library.bib}
+
+%----------------------------------------------------------------------------------------
+
+\end{document}

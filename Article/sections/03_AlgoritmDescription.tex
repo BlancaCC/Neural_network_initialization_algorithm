@@ -1,0 +1,156 @@
+\section*{Algorithm} 
+\addcontentsline{toc}{section}{\protect\numberline{}Algorithm description}
+
+
+Let  models Neural Networks the elements of the following functional space: 
+
+    For $X \subseteq \R^d, Y \subseteq \R^s$. 
+
+    \begin{align} \label{nn_functional_space}
+        \mathcal{H}(X,Y) 
+        =
+        \{
+            h : X \longrightarrow Y 
+            /& \quad 
+            h_k(x) = 
+            \sum_{i=1}^{n} \beta_{i k} \gamma( A_{i}(x))          
+        \}.
+    \end{align}
+    Where $h_k$, $k \in \{1, \ldots, s\}$ is the k-projection of $h$, 
+    $n \in \N,\gamma$ an activation function 
+    \footnote{The definition of activation function will came in next sections }, $\beta_{i k} \in \R$ and $A_{i}$ is an affine function from $\R^d$ to $\R$. 
+
+  Fixed the activation function 
+$\gamma$, we can see a Neural Network $h$ of $n$ hidden 
+units, $d \in \N$ entry dimension and $s$ output
+dimension as 
+\begin{align}
+    &h: \R^d \longrightarrow \R^s,\\
+    &h_k(x) = \sum_{i= 1}^n 
+        \left(
+            \beta_{i k} 
+            \gamma
+            \left( 
+                \sum_{j = 1}^d
+                (
+                    \alpha_{i j} x_j
+                ) + \alpha_{0 j}
+            \right)
+        \right).
+\end{align}
+determined by its params: 
+\begin{align}
+    (A,B) \in R^{n \times (d+1)} \times R^{s \times n}.
+\end{align} 
+\begin{align*}\label{eq:representation red neuronal}
+    A &= (\alpha_{i j}) \text{ con }  i \in \{0, \ldots d\}, \; j \in \{1, \ldots n\}. \\
+    B &= (\beta_{j k}) \text{ con }  j \in \{1, \ldots n\}, \; k \in \{1, \ldots s\}.
+\end{align*}
+
+For our algorithm we will determine the value of 
+$(A,B)$ seeing them and the training data as an oversized system of linear equations. 
+
+\subsection*{Algorithm description}  
+
+Let be $h \in  \mathcal{H}(\R^d, \R^s)$
+ with $n$ hidden units
+and let $M \in R^+$ chosen
+ conveniently\footnote{See subsection \textit{Some values for $M$}\ref{subsec:values of M}}. 
+
+ \begin{enumerate}
+    % First steps, initialize de values
+    \item Take randomly $p \in \R^{d+1} \setminus \{0\}$.
+    \item Let $\Lambda$ be an empty set. 
+    \item While $|\Lambda| < n$ repeat:
+    \begin{enumerate}[label=\roman*.]
+        \item Pick randomly $(x,y) \in \mathcal{D}$.
+        \item If $x$ satisfies that for every $(z,w) \in \Lambda$
+        \begin{equation}
+            p \cdot (x - z) \neq 0,
+        \end{equation}
+        then let $\Lambda \gets \Lambda \cup \{(x,y)\}$.
+    \end{enumerate}
+    % Ordered sed 
+    \item Without loss of generality the elements of $\Lambda$
+    \begin{equation*}
+        \Lambda = \{(x_1,y_1), (x_2,y_2), \ldots (x_n, y_n)\}
+    \end{equation*}
+    are ordered by the following statement
+    \begin{equation}
+        p \cdot x_1 < p \cdot x_2< \ldots p \cdot x_n.
+    \end{equation}
+    % Setting the parameters 
+    \item Pick  $(x_1, y_1) \in \Lambda$ \\
+    \begin{align*}
+        & A_{1  [1:d]} = 0 p, \\ 
+         &A_{1 0} = M , \\ 
+         & B_{* 1} = y_1.
+     \end{align*}
+    For $k \in \{1, \ldots, n \}$
+     \begin{align*}
+         &A_{k 0} = M -  \frac{2 M}{p \cdot (x_k - x_{k-1})}(p \cdot x_{k}),\\
+         & A_{k i} = \frac{2 M}{p \cdot (x_k - x_{k-1})}
+         p_{i}  \quad i \in \{1, \ldots d\},\\
+         & B_{* k} = y_k - \hat y_{k-1}.
+     \end{align*} 
+     where $(x_k, y_k) \in \Lambda$, $A_{k i}$ the element of the $k$ row and $i$ column, $B_{* k}$ denoted the $k-$th row. 
+     $\hat y_{k-1}$ is determined by: 
+     If activation function is right and left asymptotic (for example \textit{ramp function}), then 
+     \begin{equation}
+        \hat y_{k-1} = y_{k-1}.
+     \end{equation}
+      Otherwise, if activation function is only left asymptotic (for example \textit{relu function}) then 
+     \begin{equation}
+        \hat y_{k-1} = h_{k-1}(x_k),
+     \end{equation}
+     where $h_{k-1}$ is the neural network defined by known coefficient $A_{[0:k, *]}, B_{[*, 0:k]}$.
+
+     
+     \item $(A,B)$ are the matrix we searched for.
+    
+ \end{enumerate}
+ 
+
+\subsubsection*{Determine $\hat y_{k-1}$}
+\subsubsection*{Some values for $M$}
+\label{subsec:values of M}
+The value of $M$ is determined by the chosen activation function $\gamma$. 
+
+If the activation function is left and right asymptotic, the selected $M$ should verifies 
+
+For every  $K \geq M \geq 0$
+\begin{align}
+    & \gamma(K) = 1  \\
+    & \gamma(-K) = 0. 
+\end{align}
+
+If the activation function is left asymptotic $M \in \R^+$ should verify 
+
+\begin{align}
+    & \gamma(M) = 1  \\
+    & \gamma(-M) = 0. 
+\end{align}
+Could be any real value bigger than the specified one: 
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{|c|c|}
+    \hline
+        Activation function  & Minimum value of $M$ \\ \hline
+        Ramp function & 1 \\ \hline
+        \textit{Cosine Squasher} & $\frac{\pi}{2}$ \\ \hline
+        Indicator function of 0 & 0 \\ \hline
+        \textit{Hardtanh} & 1 \\ \hline
+        Sigmoid  &  $10$ (for an error smaller than $10^{-5}$)\\ \hline
+        $tanh$ &  $7$ for an error smaller than $10^{-5}$)\\ \hline
+    \end{tabular}
+    \caption{
+        Minimum value of $M$ for the algorithm depending of the chosen activation function.
+    }
+    \label{table:M-activation-function}
+\end{table}
+
+
+
+
+
