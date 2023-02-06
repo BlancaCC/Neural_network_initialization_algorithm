@@ -3,6 +3,7 @@
 
 # Python 
 code/.ipynb_checkpoints
+*.pyc
 
 #macOS
 .DS_Store
