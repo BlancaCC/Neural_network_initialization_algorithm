@@ -23,9 +23,9 @@
 \documentclass[fleqn,10pt]{SelfArx} % Document font size and equations flushed left
 
 \usepackage[english]{babel} % Specify a different language here - english by default
-\usepackage{lipsum} % Required to insert dummy text. To be removed otherwise
 \usepackage{amsthm} % Required for math stuff
 \usepackage{enumitem} % In order to use Roman enumeration
+\usepackage{adjustbox} % In order to adjust tables to pages' width
 %----------------------------------------------------------------------------------------
 %	COLUMNS
 %----------------------------------------------------------------------------------------
@@ -114,6 +114,8 @@
 \phantomsection
 \bibliographystyle{unsrt}
 \bibliography{./library.bib}
+\input{sections/07_Tables}
+
 
 %----------------------------------------------------------------------------------------
 

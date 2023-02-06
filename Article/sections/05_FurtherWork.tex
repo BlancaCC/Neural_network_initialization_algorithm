@@ -14,7 +14,7 @@ Add photo.
 
 The equations could be generalized for any neural architecture by symbolic calcs. 
 
-\subsection*{Reducing noise for tails}
+\subsection*{Reducing noise for tails: Runge's phenomenon}
 
 For no asymptotic activation functions the internode values $x$ between the 
 selected values $x_k, x_{k+1}$
@@ -26,6 +26,10 @@ selected values $x_k, x_{k+1}$
 \end{equation}
 
 the higher is $k$, more neurons will be activated  by $x$ and the higher and less smoothed will be its predictions. 
+It is similar to the Runge's phenomenon, because essentially we are doing an interpolation. 
 
-This phenomena could increase the error ans some algorithm modification may be needed. 
+This phenomena increase the error and some algorithm modification may be needed. 
+Reducing the error by assign two neuron per node, one is an auxiliar one to counter the 
+growing of the neurons. 
+Change the paradigm? Some coeefficient corrector?
 

@@ -136,13 +136,14 @@ Could be any real value bigger than the specified one:
     \centering
     \begin{tabular}{|c|c|}
     \hline
-        Activation function  & Minimum value of $M$ \\ \hline
+        \textbf{Activation function}  & \textbf{Minimum value of $M$} \\ \hline
         Ramp function & 1 \\ \hline
         \textit{Cosine Squasher} & $\frac{\pi}{2}$ \\ \hline
         Indicator function of 0 & 0 \\ \hline
         \textit{Hardtanh} & 1 \\ \hline
         Sigmoid  &  $10$ (for an error smaller than $10^{-5}$)\\ \hline
         $tanh$ &  $7$ for an error smaller than $10^{-5}$)\\ \hline
+        Relu & 1 (The only valid value of M) \\ \hline
     \end{tabular}
     \caption{
         Minimum value of $M$ for the algorithm depending of the chosen activation function.

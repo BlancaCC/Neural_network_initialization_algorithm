@@ -17,10 +17,35 @@ three set:
 \end{itemize}
 
 Once $E_{in}^{Init}$ for our algorithm is computed,
-for a bathsize $b$,  we count the minimum number of epochs of backpropagation  
-needed in order to achieve $E_{in}^{Init} \geq E_{in}^{b}$. 
+we measured backpropagation.
+For a bathsize $b$, and a maximum of epoch we compute the error.  
 
 \subsection*{Datasets}
 
 From Kaggle House Price Prediction 
 \url{https://www.kaggle.com/datasets/shree1992/housedata}
+
+The results can be found at the end of this article or
+at 
+ \begin{verbatim}
+    Experiment/results_house_price.csv
+\end{verbatim}
+
+The columns are: 
+\begin{itemize}
+    \item \textit{Experiment}: The number of experiment, it is repeated five times. 
+    \item \textit{neurons}: The number of neurons our neural network will has. 
+    \item \textit{initialization algorithm}: can have two values 0 or 1. It is 1 if the results is for our initialization algorithm. 
+    \item \textit{batch}: batch size for sklearnt.
+    \item \textit{maximum iter}: maximum number of iteration for sklearnt. 
+    \item \textit{error} l2.
+    \item \textit{timer}: time spent in training. 
+\end{itemize}
+
+Before a Wilcoxon's test we see that the algorithm 
+achieve less error in test and good times. 
+ 
+For our initialization algorithm the error decreases
+ as the number of neurons increase,
+but for Backpropagation it increases.
+
